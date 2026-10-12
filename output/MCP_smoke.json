@@ -1,0 +1,243 @@
+{
+  "server": "campus-customs (mcp_server/server.py, connected via .mcp.json)",
+  "database": "data/campus_customs_new.db",
+  "date_today": "2026-08-31",
+  "all_values_match_database": true,
+  "tests": [
+    {
+      "prompt": "Show me every open ticket on the board, with any linked lease or invoice, and the shop's date today.",
+      "tool": "list_tickets",
+      "arguments": {},
+      "tool_output": {
+        "date_today": "2026-08-31",
+        "status_filter": "open",
+        "tickets": [
+          {
+            "id": 101,
+            "type": "customer_order",
+            "requester": "Tauhid Zaman",
+            "subject": "Bulldog tee",
+            "sku": "CC-TEE-WHITE",
+            "size": "S",
+            "qty": 1,
+            "lease_id": null,
+            "invoice_id": 501,
+            "status": "open",
+            "notes": "Needs a tee in size S.",
+            "created_at": "2026-08-31T09:15:00-04:00",
+            "invoice": {
+              "id": 501,
+              "vendor_id": 1,
+              "amount": 840,
+              "due_date": "2026-08-28",
+              "status": "open",
+              "description": "Rush reprint CC-TEE-WHITE S"
+            }
+          },
+          {
+            "id": 102,
+            "type": "rent_notice",
+            "requester": "Elm City Properties",
+            "subject": "Rent due",
+            "sku": null,
+            "size": null,
+            "qty": null,
+            "lease_id": 1,
+            "invoice_id": null,
+            "status": "open",
+            "notes": "Email: shop rent due in 2 days.",
+            "created_at": "2026-08-31T11:05:00-04:00",
+            "lease": {
+              "id": 1,
+              "space_name": "Chapel Street shop",
+              "landlord": "Elm City Properties",
+              "monthly_rent": 2400,
+              "next_due": "2026-09-02",
+              "notes": null
+            }
+          },
+          {
+            "id": 103,
+            "type": "price_override",
+            "requester": "Yale AI Club",
+            "subject": "Bulk hoodie discount",
+            "sku": "CC-HOOD-NAVY",
+            "size": "M",
+            "qty": 20,
+            "lease_id": null,
+            "invoice_id": null,
+            "status": "open",
+            "notes": "Student org wants 20 hoodies, size M, asking for a bulk discount.",
+            "created_at": "2026-08-31T16:55:00-04:00"
+          }
+        ]
+      },
+      "database_check": {
+        "SELECT date_today FROM desk": [
+          [
+            "2026-08-31"
+          ]
+        ],
+        "SELECT * FROM tickets WHERE status='open'": [
+          [
+            101,
+            "customer_order",
+            "Tauhid Zaman",
+            "Bulldog tee",
+            "CC-TEE-WHITE",
+            "S",
+            1,
+            null,
+            501,
+            "open",
+            "Needs a tee in size S.",
+            "2026-08-31T09:15:00-04:00"
+          ],
+          [
+            102,
+            "rent_notice",
+            "Elm City Properties",
+            "Rent due",
+            null,
+            null,
+            null,
+            1,
+            null,
+            "open",
+            "Email: shop rent due in 2 days.",
+            "2026-08-31T11:05:00-04:00"
+          ],
+          [
+            103,
+            "price_override",
+            "Yale AI Club",
+            "Bulk hoodie discount",
+            "CC-HOOD-NAVY",
+            "M",
+            20,
+            null,
+            null,
+            "open",
+            "Student org wants 20 hoodies, size M, asking for a bulk discount.",
+            "2026-08-31T16:55:00-04:00"
+          ]
+        ],
+        "SELECT * FROM invoices WHERE id=501": [
+          [
+            501,
+            1,
+            840.0,
+            "2026-08-28",
+            "open",
+            "Rush reprint CC-TEE-WHITE S"
+          ]
+        ],
+        "SELECT * FROM leases WHERE id=1": [
+          [
+            1,
+            "Chapel Street shop",
+            "Elm City Properties",
+            2400.0,
+            "2026-09-02",
+            null
+          ]
+        ]
+      },
+      "matches_database": true
+    },
+    {
+      "prompt": "Ticket 103: how many CC-HOOD-NAVY hoodies in size M do we have, and what are the unit cost and list price?",
+      "tool": "check_stock",
+      "arguments": {
+        "sku": "CC-HOOD-NAVY",
+        "size": "M"
+      },
+      "tool_output": {
+        "found": true,
+        "sku": "CC-HOOD-NAVY",
+        "name": "Basic Hoodie Big Yale",
+        "stock": [
+          {
+            "size": "M",
+            "qty": 8,
+            "location": "Aisle A"
+          }
+        ],
+        "pricing": {
+          "sku": "CC-HOOD-NAVY",
+          "unit_cost": 22,
+          "list_price": 58
+        }
+      },
+      "database_check": {
+        "SELECT qty, location FROM inventory WHERE sku='CC-HOOD-NAVY' AND size='M'": [
+          [
+            8,
+            "Aisle A"
+          ]
+        ],
+        "SELECT unit_cost, list_price FROM pricing WHERE sku='CC-HOOD-NAVY'": [
+          [
+            22.0,
+            58.0
+          ]
+        ]
+      },
+      "matches_database": true
+    },
+    {
+      "prompt": "Ticket 101: can Bulldog Print Co (vendor 1) reprint the white tee? Show their lead time and any unpaid invoices.",
+      "tool": "get_vendor_status",
+      "arguments": {
+        "vendor_id": 1
+      },
+      "tool_output": {
+        "found": true,
+        "date_today": "2026-08-31",
+        "vendors": [
+          {
+            "id": 1,
+            "name": "Bulldog Print Co",
+            "specialty": "apparel reprint",
+            "lead_days": 5,
+            "unpaid_invoices": [
+              {
+                "id": 501,
+                "vendor_id": 1,
+                "amount": 840,
+                "due_date": "2026-08-28",
+                "status": "open",
+                "description": "Rush reprint CC-TEE-WHITE S",
+                "days_overdue": 3
+              }
+            ],
+            "unpaid_total": 840,
+            "can_ship": false
+          }
+        ]
+      },
+      "database_check": {
+        "SELECT * FROM vendors WHERE id=1": [
+          [
+            1,
+            "Bulldog Print Co",
+            "apparel reprint",
+            5
+          ]
+        ],
+        "SELECT * FROM invoices WHERE vendor_id=1 AND status!='paid'": [
+          [
+            501,
+            1,
+            840.0,
+            "2026-08-28",
+            "open",
+            "Rush reprint CC-TEE-WHITE S"
+          ]
+        ],
+        "days_overdue": "2026-08-31 (desk.date_today) minus 2026-08-28 (invoices.due_date) = 3"
+      },
+      "matches_database": true
+    }
+  ]
+}

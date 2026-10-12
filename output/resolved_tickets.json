@@ -1,0 +1,184 @@
+[
+  {
+    "id": 101,
+    "subject": "Bulldog tee",
+    "requester": "Tauhid Zaman",
+    "final_status": "resolved",
+    "outcome": "Invoice 501 was paid by Sam ($840.00), and PO approval 2 for one CC-TEE-WHITE size S ($8.00) was ordered by Sam. Bulldog Print Co can ship; 5-day lead time from 2026-08-31 gives expected arrival 2026-09-05; 0 units remain on hand currently.",
+    "agents": [
+      {
+        "agent": "boss",
+        "contribution": [
+          "Run 1 (first run): The requested CC-TEE-WHITE size S tee cannot be filled from current stock: 0 are on hand for the requested quantity of 1. Bulldog Print Co cannot ship while invoice 501 ($840.00, due 2026-08-28) remains unpaid. Accounting filed pending approval 1 to pay that invoice and pending approval 2 for a one-unit restock PO ($8.00). Recommend approving invoice payment 1 first to clear the vendor hold, then PO 2; preserve $2,400.00 for rent due 2026-09-02. Current cash is $3,400.00 and cash after pending payment requests is $2,560.00. Draft 1 tells the customer stock is unavailable and there is no confirmed restock date; it has not been sent.",
+          "Run 2 (close-out run after human approvals): Resolved: Sam paid invoice 501 to Bulldog Print Co for $840.00 and ordered PO approval 2 for 1 CC-TEE-WHITE size S at $8.00. Stock is currently 0. Bulldog Print Co can ship and has a 5-day lead time; using date_today 2026-08-31, expected arrival is 2026-09-05. Customer message draft 1 remains for human review and has not been sent."
+        ]
+      },
+      {
+        "agent": "inventory",
+        "contribution": [
+          "Run 1 (first run): CC-TEE-WHITE size S is out of stock: 0 on hand in Aisle B, so the order for 1 has a shortfall of 1. The suitable apparel vendor is Bulldog Print Co (vendor 1), with a 5-day lead time, but it cannot ship now because invoice 501 is unpaid; the arrival date cannot be determined until the invoice is paid."
+        ]
+      },
+      {
+        "agent": "accounting",
+        "contribution": [
+          "Run 1 (first run): Ticket 101 has zero CC-TEE-WHITE size S in stock, so a one-unit restock is needed; vendor Bulldog Print Co cannot ship while overdue invoice 501 remains unpaid. I filed invoice-payment approval 1 for $840.00 and purchase-order approval 2 for $8.00; approving the invoice alone leaves $2,560.00 cash, and after the listed $2,400.00 rent due in two days, $160.00 would remain before the future PO cost."
+        ]
+      },
+      {
+        "agent": "customer_service",
+        "contribution": [
+          "Run 1 (first run): Drafted a customer update for Tauhid Zaman stating CC-TEE-WHITE size S is out of stock and there is no confirmed restock date. The draft was saved for human review and was not sent."
+        ]
+      }
+    ],
+    "human_approvals": [
+      {
+        "approval_id": 1,
+        "kind": "invoice_payment",
+        "amount": 840.0,
+        "requested_by": "accounting",
+        "decision": "paid",
+        "decided_by": "Sam",
+        "decided_at": "2026-10-12T00:39:28+00:00",
+        "payment_id": 1
+      },
+      {
+        "approval_id": 2,
+        "kind": "purchase_order",
+        "amount": 8.0,
+        "requested_by": "accounting",
+        "decision": "ordered",
+        "decided_by": "Sam",
+        "decided_at": "2026-10-12T00:39:30+00:00",
+        "payment_id": null
+      }
+    ],
+    "drafts_on_board": [
+      {
+        "draft_id": 1,
+        "to": "Tauhid Zaman",
+        "subject": "Update on your Bulldog tee",
+        "sent": false
+      }
+    ],
+    "runs": [
+      "a37382b233ba",
+      "3a7598ba19de"
+    ]
+  },
+  {
+    "id": 102,
+    "subject": "Rent due",
+    "requester": "Elm City Properties",
+    "final_status": "resolved",
+    "outcome": "Rent payment approval 3 for lease 1 was paid by Sam ($2,400.00); lease next due date is 2026-10-02. No payment request remains pending.",
+    "agents": [
+      {
+        "agent": "boss",
+        "contribution": [
+          "Run 1 (first run): Lease 1 rent for the Chapel Street shop is $2,400.00 and due 2026-09-02 (2 days after 2026-08-31). Accounting filed pending rent-payment approval 3. Cash is $3,400.00; with all pending payments totaling $3,240.00 approved, $160.00 remains. Customer service created draft 2 for Elm City Properties; it has not been sent.",
+          "Run 2 (close-out run after human approvals): Rent for lease 1 was paid under approval 3 by Sam for $2,400.00. The lease's next rent due date is 2026-10-02; ticket 102 is resolved. Draft 2 to Elm City Properties remains on the board for human review and has not been sent."
+        ]
+      },
+      {
+        "agent": "facilities",
+        "contribution": [
+          "Run 1 (first run): Lease 1 is for the Chapel Street shop with landlord Elm City Properties and monthly rent of $2,400.00. Against date_today 2026-08-31, rent is due 2026-09-02, in 2 days, and is not overdue; no payment has been made or requested for this due date."
+        ]
+      },
+      {
+        "agent": "customer_service",
+        "contribution": [
+          "Run 1 (first run): Drafted an acknowledgement to Elm City Properties confirming receipt of the rent notice for the Chapel Street shop and stating that payment is being processed for approval. No existing draft was present, and the new message was not sent."
+        ]
+      },
+      {
+        "agent": "accounting",
+        "contribution": [
+          "Run 1 (first run): Cash on hand is $3,400.00, with $840.00 already in pending payment requests, leaving $2,560.00 before this rent request. No approval existed for ticket 102; the $2,400.00 rent payment request for lease 1 was filed and is pending human approval, leaving $160.00 if all pending requests are approved."
+        ]
+      }
+    ],
+    "human_approvals": [
+      {
+        "approval_id": 3,
+        "kind": "rent_payment",
+        "amount": 2400.0,
+        "requested_by": "accounting",
+        "decision": "paid",
+        "decided_by": "Sam",
+        "decided_at": "2026-10-12T00:39:32+00:00",
+        "payment_id": 2
+      }
+    ],
+    "drafts_on_board": [
+      {
+        "draft_id": 2,
+        "to": "Elm City Properties",
+        "subject": "Re: Rent due",
+        "sent": false
+      }
+    ],
+    "runs": [
+      "1c4a2c2a4abf",
+      "b71996017ce4"
+    ]
+  },
+  {
+    "id": 103,
+    "subject": "Bulk hoodie discount",
+    "requester": "Yale AI Club",
+    "final_status": "resolved",
+    "outcome": "No discount approved: current list price is $58.00 each and stock is 8 of 20 requested. Draft 4 requests a target price and explains the 12-unit restock gap; do not send superseded draft 3, which still offers $50.00 each. No approval requests filed.",
+    "agents": [
+      {
+        "agent": "boss",
+        "contribution": [
+          "Run 1 (first run): Offer Yale AI Club the 8 CC-HOOD-NAVY hoodies, size M, currently in stock at $50.00 each. That is 13.79% below the $58.00 list price and yields a 56.00% margin ($28.00 per unit; $224.00 total margin for 8). The requested 20 cannot be filled from current stock: 12 are short, and no delivery date or availability is confirmed. Draft 3 is prepared for human review; no purchase order or payment request was filed. Keep the ticket open pending draft review and the club's response.",
+          "Run 2 (second run): Decline the requested bulk discount for now because no target price was provided. Offer only the 8 CC-HOOD-NAVY size-M hoodies currently in stock at the $58.00 list price; the remaining 12 are not available now. No purchase order or payment request was made. Draft 4 asks Yale AI Club for its proposed unit price and explains the restock gap; do not send draft 3 because it still offers $50.00 each, which was not approved."
+        ]
+      },
+      {
+        "agent": "inventory",
+        "contribution": [
+          "Run 1 (first run): CC-HOOD-NAVY size M has 8 units on hand in Aisle A, so it is 12 units short of the requested 20. Pricing returned is $22.00 unit cost and $58.00 list price; no order was placed.",
+          "Run 2 (second run): There are 8 CC-HOOD-NAVY hoodies in size M in Aisle A, so the requested quantity of 20 cannot be filled from current size-M stock; the shortfall is 12. The relevant apparel reprint vendor is Bulldog Print Co (vendor 1), with a 5-day lead time and can_ship=true; no order was placed."
+        ]
+      },
+      {
+        "agent": "accounting",
+        "contribution": [
+          "Run 1 (first run): For 20 CC-HOOD-NAVY hoodies, list price is $58.00 each and unit cost is $22.00; at list price the total margin is $720.00 (62.07%). The discount examples below all remain above cost; no payment or purchase order was filed.",
+          "Run 2 (second run): For ticket 103, the list-price margin on 20 CC-HOOD-NAVY hoodies, size M requested, is $36.00 per unit and $720.00 total. No proposed discounted price was provided, so no alternate-price calculation or payment/PO request was made; current cash is $160.00."
+        ]
+      },
+      {
+        "agent": "customer_service",
+        "contribution": [
+          "Run 1 (first run): Drafted a message to Yale AI Club offering the 8 currently available CC-HOOD-NAVY hoodies, size M, at $50.00 each. The draft says availability and delivery timing for the remaining 12 are unconfirmed; it has not been sent.",
+          "Run 2 (second run): Created revised draft 4 to Yale AI Club stating that 8 size-M hoodies are available at $58.00 each, no discount is approved, and fulfilling 20 would require restocking 12 with no completion or delivery date confirmed. The existing draft 3 was not modified and still contains the unsupported $50.00 offer."
+        ]
+      }
+    ],
+    "human_approvals": [],
+    "drafts_on_board": [
+      {
+        "draft_id": 3,
+        "to": "Yale AI Club",
+        "subject": "Re: Bulk hoodie discount",
+        "sent": false
+      },
+      {
+        "draft_id": 4,
+        "to": "Yale AI Club",
+        "subject": "Re: Bulk hoodie discount",
+        "sent": false
+      }
+    ],
+    "runs": [
+      "d60b5b735b4e",
+      "9a01045b5f93"
+    ]
+  }
+]
